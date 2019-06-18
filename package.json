@@ -1,0 +1,22 @@
+{
+  "name": "reactproject",
+  "version": "1.0.0",
+  "description": "reactproject",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deedeemedina/reactproject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deedeemedina/reactproject/issues"
+  },
+  "homepage": "https://github.com/deedeemedina/reactproject#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
