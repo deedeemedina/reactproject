@@ -13,8 +13,9 @@ class App extends Component {
 
   }
   handleSubmit = e => {
-    // e.preventDefault();
-    console.log("click")
+    e.preventDefault();
+    const { name, password, email } = this.state;
+    console.log(name, password, email)
   }
 
   handleChange = e => {
