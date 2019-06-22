@@ -1,40 +1,96 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-state = {
-    data: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      password: '',
+      email: '',
+    };
 
-  componentDidMount() {
-      // Call our fetch function below once the component mounts
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
+
   }
-    // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
+  handleSubmit = e => {
+    // e.preventDefault();
+    console.log("click")
+  }
 
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
-  };
-
+  handleChange = e => {
+    console.log(e.target.value)
+    this.setState({[e.target.name]: e.target.value})
+  }
   render() {
+
     return (
+
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header> 
-        <p className="App-intro">{this.state.data}</p>
+       <div className="App__Aside"></div>
+        <div className="App__Form">
+          <div className="PageSwitcher">
+           <a href="#" className="PageSwitcher__Item">Sign In</a>
+           <a href="#" className="PageSwitcher__Item PageSwitcher__Item--Active">Sign Up</a>
+       </div>
+        <div className="FormTitle">
+          <a href="#" className="FormTitle__Link">Sign In</a> or <a href="#"className="FormTitle__Link FormTitle__Link--Active">Sign Up</a>
       </div>
+        <div className="FormCenter">
+          <form className="FormFields" onSubmit={this.handleSubmit}>
+            <div className="FormField">
+             <label className="FormField__Label" htmlFor="name">Full Name</label>
+             <input 
+              type="text" 
+              id="name" 
+              className="FormField__Input" 
+              placeholder="Enter your full name" 
+              name="name" 
+              value={this.state.value} 
+              onChange={this.handleChange}
+            />
+             </div>
+             <div className="FormField">
+             <label className="FormField__Label" htmlFor="password">Password</label>
+             <input 
+              type="password" 
+              id="password" 
+              className="FormField__Input" 
+              placeholder="Enter your password" 
+              name="password"
+              value={this.state.value} 
+              onChange={this.handleChange}
+            />
+             </div>
+             <div className="FormField">
+             <label className="FormField__Label" 
+              htmlFor="email">E-mail Address</label>
+             <input 
+             type="email" id="email" 
+             className="FormField__Input" 
+             placeholder="Enter your email" 
+             name="email" value={this.state.value} 
+             onChange={this.handleChange}/>
+             </div>
+          <label 
+          className="FormField__CheckboxLabel">
+          <input 
+          className="FormField__Checkbox" 
+          type="checkbox" name="hasAgreed" /> I Agree all statements in <a 
+          href="" 
+          className="FormField__TermsLink" 
+          value={this.state.value} 
+          onChange={this.handleChange}>terms of service</a>
+          </label>
+               <button>click</button>
+          </form>
+      </div>
+    </div>
+</div>
+      
+
     );
   }
+
 }
 
 export default App;
