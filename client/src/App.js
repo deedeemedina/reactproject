@@ -1,7 +1,41 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
+import SignUpForm from './pages/SignUpForm';
+import SignInForm from './pages/SignInForm';
 import './App.css';
 
+
 class App extends Component {
+  render() {
+    return (
+      <Router basename="/react-auth-ui/">
+        <div className="App">
+          <div className="App__Aside"></div>
+          <div className="App__Form">
+            <div className="PageSwitcher">
+                <NavLink to="/sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
+                <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+              </div>
+
+              <div className="FormTitle">
+                  <NavLink to="/sign-in" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign In</NavLink> or <NavLink exact to="/" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign Up</NavLink>
+              </div>
+
+              <Route exact path="/" component={SignUpForm}>
+              </Route>
+              <Route path="/sign-in" component={SignInForm}>
+              </Route>
+          </div>
+
+        </div>
+      </Router>
+    );
+  }
+}
+
+export default App;
+
+/*class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,26 +50,49 @@ class App extends Component {
     e.preventDefault();
     const { name, password, email } = this.state;
     console.log(name, password, email)
+    fetch('http://localhost:5000', {
+      method: 'POST',
+      // headers: {
+      //   'Content-Type': 'application/json',
+      //   'Accept':  'application/json'
+      // },
+      body: JSON.stringify(name, password, email),
+
+    })
+    
   }
 
   handleChange = e => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     this.setState({[e.target.name]: e.target.value})
   }
   render() {
 
     return (
 
+      <Router>
+
       <div className="App">
        <div className="App__Aside"></div>
         <div className="App__Form">
           <div className="PageSwitcher">
-           <a href="#" className="PageSwitcher__Item">Sign In</a>
-           <a href="#" className="PageSwitcher__Item PageSwitcher__Item--Active">Sign Up</a>
+           <NavLink to="/sign-in" activeClassName="PageSwitcher__Item--Active" 
+           className="PageSwitcher__Item">Sign In</NavLink>
+           <NavLink to="/sign-up" activeClassName="PageSwitcher__Item--Active"
+           className="PageSwitcher__Item">Sign Up</NavLink>
        </div>
-        <div className="FormTitle">
-          <a href="#" className="FormTitle__Link">Sign In</a> or <a href="#"className="FormTitle__Link FormTitle__Link--Active">Sign Up</a>
+
+
+      <div className="FormTitle">
+          <NavLink to="/sign-in" activeClassName="FormTitle__Link--Active" 
+          className="FormTitle__Link">Sign In</NavLink> or <NavLink exact to="/"
+          activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign Up</NavLink>
       </div>
+
+
+
+        <Route exact path="/" Component={SignUpForm}>
+
         <div className="FormCenter">
           <form className="FormFields" onSubmit={this.handleSubmit}>
             <div className="FormField">
@@ -72,6 +129,7 @@ class App extends Component {
              name="email" value={this.state.value} 
              onChange={this.handleChange}/>
              </div>
+             <div className="FormField">
           <label 
           className="FormField__CheckboxLabel">
           <input 
@@ -82,16 +140,30 @@ class App extends Component {
           value={this.state.value} 
           onChange={this.handleChange}>terms of service</a>
           </label>
-               <button>click</button>
+          </div>
+
+          <div className= "FormField">
+          <button className="FormField__Button mr-20">Sign Up</button> <a href="#"
+          className= "FormField__Link">I'm already a member</a>
+          </div>
           </form>
-      </div>
+        </div>
+
+      </Route>
+
+      <Route path="/sign-in" Component={SignInForm}>
+  
+      </Route>
+
     </div>
-</div>
-      
+
+  </div>
+
+ </Router>
 
     );
   }
 
 }
 
-export default App;
+export default App*/
